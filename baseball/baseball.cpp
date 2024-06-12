@@ -8,22 +8,24 @@ int main() {
 
 	cout << "===== BASEBALL GAME =====" << endl << endl;
 
-	int numA, numB, numC;
+	int baseball[3];
 
 	srand((unsigned int)time(NULL)); // seed 값으로 현재시간 부여
-	numA = rand() % 10; // 0 ~ 9
 
-	do {
-		numB = rand() % 10;
-	} while (numA == numB);
-	
-	do {
-		numC = rand() % 10;
-	} while (numA == numC || numB == numC);
+	for (int i = 0; i < 3; i++) {
+		baseball[i] = rand() % 10; // 0 ~ 9
+		int j = 0;
+		while(j < i) {
+			if (baseball[j] == baseball[i]) {
+				baseball[i] = rand() % 10; // 0 ~ 9
+			}
+			else {
+				j++;
+			}
+		}
+	}
 
-	// cout << endl << "랜덤 숫자: " << numA << " " << numB << " " << numC << endl << endl;
-
-	int num1, num2, num3;
+	int num[3];
 	int strike, ball;
 
 	for (int i = 0; i < 10; i++) {
@@ -31,42 +33,29 @@ int main() {
 
 		cout << i + 1 << "번째 기회" << endl;
 
-		cout << "1번 숫자를 입력하세요: ";
-		cin >> num1;
-
-		cout << "2번 숫자를 입력하세요: ";
-		cin >> num2;
-
-		cout << "3번 숫자를 입력하세요: ";
-		cin >> num3;
-
-		// cout << endl << "랜덤 숫자: " << numA << " " << numB << " " << numC << endl;
-		cout << "입력 숫자: " << num1 << " " << num2 << " " << num3 << endl << endl;
-	
-		if (numA == num1) {
-			// cout << "numA == num1" << endl;
-			strike++;
-		}
-		if (numB == num2) {
-			// cout << "numB == num2" << endl;
-			strike++;
-		}
-		if (numC == num3) {
-			// cout << "numC == num3" << endl;
-			strike++;
+		for (int j = 0; j < 3; j++) {
+			cout << j + 1 << "번 숫자를 입력하세요: ";
+			cin >> num[j];
 		}
 
-		if (numA == num2 || numA == num3) {
-			// cout << "numA == num2 || numA == num3" << endl;
-			ball++;
+		cout << "입력 숫자: ";
+		for (int j = 0; j < 3; j++) {
+			cout << num[j] << " ";
 		}
-		if (numB == num1 || numB == num3) {
-			// cout << "numB == num1 || numB == num3" << endl;
-			ball++;
-		}
-		if (numC == num1 || numC == num2) {
-			// cout << "numC == num1 || numC == num2" << endl;
-			ball++;
+		cout << endl << endl;
+
+
+		for (int j = 0; j < 3; j++) {
+			for (int k = 0; k < 3; k++) {
+				if (baseball[j] == num[k]) {
+					if (j == k) {
+						strike++;
+					}
+					else {
+						ball++;
+					}
+				}
+			}
 		}
 
 		cout << i + 1 << "번째 결과: " << strike << " 스트라이크, " << ball << " 볼" << endl << endl;
@@ -76,7 +65,11 @@ int main() {
 		}
 	}
 
-	cout << endl << "정답: " << numA << " " << numB << " " << numC << endl << endl;
+	cout << endl << "정답: ";
+	for (int i = 0; i < 3; i++) {
+		cout << baseball[i] << " ";
+	}
+	cout << endl;
 
 	return 0;
 }
