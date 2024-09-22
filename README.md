@@ -12,7 +12,7 @@
 ### Chapter 07 구조체
 ### Chapter 08 함수
 ### Chapter 09 클래스
-### Chapter 08 생성자와 소멸자
+### Chapter 10 생성자와 소멸자
 
 ```
 
